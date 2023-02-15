@@ -1,0 +1,16 @@
+﻿@page
+@model SkysFormsDemo.Pages.Account.WithdrawModel
+@{
+}
+
+
+<form method="post">
+    
+    <div class="form-group">
+        <label asp-for="Amount">Belopp</label>
+        <input class="form-control" asp-for="Amount" />
+        <span class="field-validation-error" asp-validation-for="Amount"></span>
+    </div>
+
+    <button type="submit" class="btn">Deposit</button>
+</form>

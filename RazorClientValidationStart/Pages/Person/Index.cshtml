@@ -1,0 +1,74 @@
+﻿@page
+@using Microsoft.EntityFrameworkCore.Metadata.Conventions
+@model IndexModel
+@{
+    ViewData["Title"] = "Personer";
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h1>Alla personer</h1>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Namn</th>
+                <th>Email</th>
+                <th>City</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var person in Model.Persons)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.Email</td>
+                    <td>@person.City</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-personId="@person.Id"><i class='bx bx-edit'></i></a>
+                    </td>
+                    <td>
+                        <a asp-page="View" asp-route-personId="@person.Id">
+                            <i class='bx bxs-user-detail'></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="javascript:fetchInfo(@person.Id)"><i class='bx bx-info-circle'></i></a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <a class="btn" asp-page="New">Create new</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h1>Extra Info</h1>
+    </div>
+    <div class="card-body">
+        <div>
+            <h3>Name</h3>
+            <h4 id="name">...</h4>
+            <h3>Number of Cars</h3>
+            <p id="cars">...</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        function fetchInfo(id) {
+            fetch("/Person?handler=FetchInfo&id=" + id)
+                .then((response) => response.json())
+                .then((json) => {
+                    document.getElementById('name').innerHTML = json.name;
+                    document.getElementById('cars').innerHTML = json.numberOfCars;
+                });
+        }
+    </script>
+}

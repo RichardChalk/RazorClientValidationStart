@@ -1,0 +1,67 @@
+﻿@page
+@model RazorAjax3UseCasesEnd.Pages.Person.ViewModel
+@{
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1>@Model.Name</h1>
+    </div>
+    <div class="card-body">
+        <table class="table" id="posts-table">
+            <tr>
+                <th style="text-align:left">Manufacturer</th>
+                <th style="text-align:left">Model</th>
+                <th style="text-align:left">Type</th>
+                <th style="text-align:left">Fuel</th>
+                <th style="text-align:left">Boughtdate</th>
+                <th style="text-align:left"></th>
+            </tr>
+        </table>
+        <a class="btn btn-primary" href="javascript:showMore();">Show More</a>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        lastTicks = 0;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            showMore();
+        });
+
+        function showMore() {
+             fetch("View?handler=ShowMore&lastTicks=" + lastTicks + "&personId=@Model.Id")
+                .then((response) => response.json())
+                .then((json) => {
+                        lastTicks = json.lastTicks;
+                        json.cars.forEach(drawElements);
+                });
+        }
+
+        function drawElements(element) {
+            document.querySelector('#posts-table tbody').innerHTML +=
+                `<tr>
+                    <td>${element.manufacturer}</td>
+                    <td>${element.model}</td>
+                    <td>${element.type}</td>
+                    <td>${element.fuel}</td>
+                    <td>${new Date(element.boughtDate).toLocaleDateString()}</td> 
+                    <td>
+                        <a class="btn" onclick="fetchEvaluation(${element.id}, this)">
+                        Show Value</a>
+                    </td>
+                </tr>`;
+        }
+
+        function fetchEvaluation(id, elem) {
+            fetch("View?handler=FetchValue&id=" + id)
+                .then((response) => response.json())
+                .then((json) => {
+                    elem.innerHTML = json.value + "kr";
+                });
+        }
+    </script>
+}
+

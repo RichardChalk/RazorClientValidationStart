@@ -1,0 +1,73 @@
+﻿@page
+@model SkysFormsDemo.Pages.Person.NewModel
+@{
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1>Ny person</h1>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Namn</label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input class="form-control" asp-for="Email">
+                <span asp-validation-for="Email" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetAddress">Gatuadress</label>
+                <input class="form-control" asp-for="StreetAddress">
+                <span asp-validation-for="StreetAddress" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostalCode">Postnr</label>
+                <input class="form-control" asp-for="PostalCode">
+                <span asp-validation-for="PostalCode" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City">Stad</label>
+                <input class="form-control" asp-for="City">
+                <span asp-validation-for="City" class="field-validation-error"></span>
+            </div>
+            
+            
+            <div class="form-group">
+                <label asp-for="CountryId">Country </label>
+                <select asp-for="CountryId" asp-items="@Model.Countries" >
+
+                </select>
+                <span asp-validation-for="CountryId" class="field-validation-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Position">Position </label>
+                <select asp-for="Position" asp-items="@Model.PlayerPositions" >
+
+                </select>
+                <span asp-validation-for="Position" class="field-validation-error"></span>
+            </div>
+            
+            
+
+            <div class="form-group">
+                <label asp-for="Salary">Lön</label>
+                <input class="form-control" asp-for="Salary">
+                <span asp-validation-for="Salary" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarCount">Antal bilar</label>
+                <input class="form-control" asp-for="CarCount">
+                <span asp-validation-for="CarCount" class="field-validation-error"></span>
+            </div>
+        
+            <button type="submit" class="btn">Save</button>
+        </form>
+
+
+    </div>
+</div>
