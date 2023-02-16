@@ -109,6 +109,7 @@ namespace SkysFormsDemo.Pages.Person
             }
 
             FillCountryList();
+            FillPositionsList();
             return Page();
         }
 
